@@ -1,0 +1,14 @@
+node_modules/
+vendor/
+.env
+parkir_app/.env
+parkir_app/node_modules/
+parkir_app/vendor/
+parkir_app/storage/*.key
+parkir_app/storage/framework/cache/data/*
+parkir_app/storage/framework/sessions/*
+parkir_app/storage/framework/views/*.php
+parkir_app/storage/logs/*.log
+parkir_app/bootstrap/cache/*.php
+.DS_Store
+Thumbs.db
