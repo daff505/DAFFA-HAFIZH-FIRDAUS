@@ -127,33 +127,14 @@
             </div>
         </div>
 
-        <div class="card p-6 rounded-2xl">
-            <div class="flex justify-between items-center mb-6">
-                <h3 class="text-lg font-semibold text-white">Status Slot Parkir Aktif</h3>
-                <span class="text-[10px] text-sky-400 bg-sky-500/10 px-3 py-1 rounded-full border border-sky-500/20">REAL-TIME DB</span>
+        <div class="card p-8 rounded-3xl border border-sky-500/10 bg-gradient-to-br from-slate-800/50 to-slate-900/50">
+            <div class="flex items-center gap-4 mb-4 text-sky-400">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                <h3 class="text-xl font-bold text-white">Informasi Petugas</h3>
             </div>
-
-            <div class="space-y-6">
-                @if(isset($data['areas']) && count($data['areas']) > 0)
-                    @foreach($data['areas'] as $area)
-                        @php
-                            $percentage = ($area->kapasitas > 0) ? round(($area->terisi / $area->kapasitas) * 100) : 0;
-                            $colorClass = $percentage > 85 ? 'bg-red-500' : ($percentage > 60 ? 'bg-amber-500' : 'bg-sky-500');
-                        @endphp
-                        <div>
-                            <div class="flex justify-between text-xs mb-2">
-                                <span class="text-slate-300 font-medium">{{ $area->nama_area }}</span>
-                                <span class="text-slate-500">{{ $area->terisi }} / {{ $area->kapasitas }} Slot</span>
-                            </div>
-                            <div class="w-full bg-slate-800 rounded-full h-3 border border-slate-700/30 overflow-hidden">
-                                <div class="{{ $colorClass }} h-full transition-all duration-1000 ease-in-out" style="width: {{ $percentage }}%"></div>
-                            </div>
-                        </div>
-                    @endforeach
-                @else
-                    <div class="text-slate-500 text-sm italic">Data area parkir belum tersedia.</div>
-                @endif
-            </div>
+            <p class="text-slate-400 leading-relaxed">
+                Gunakan menu di atas untuk mencatat kendaraan masuk atau menghitung tarif keluar. Pastikan setiap transaksi dicetak struknya sebagai bukti pembayaran yang sah.
+            </p>
         </div>
 
     @elseif(auth()->check() && auth()->user()->role == 'owner')
@@ -179,51 +160,17 @@
         </div>
 
         <!-- STATS WIDGETS -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-            <!-- Pendapatan Card -->
-            <div class="card p-6 rounded-2xl border-l-4 border-l-emerald-500">
-                <div class="flex items-center gap-4 mb-4">
-                    <div class="p-3 bg-emerald-500/10 rounded-xl text-emerald-400">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                    </div>
-                    <span class="text-slate-400 text-sm font-medium uppercase tracking-wider">Pendapatan Bulan Ini</span>
-                </div>
-                <h3 class="text-2xl font-bold text-white font-mono">Rp {{ number_format($data['pendapatan'] ?? 0, 0, ',', '.') }}</h3>
-                <p class="text-[10px] text-emerald-500 mt-2 font-bold uppercase">Terakumulasi Otomatis</p>
-            </div>
-
-            <!-- Volume Card -->
-            <div class="card p-6 rounded-2xl border-l-4 border-l-sky-500">
-                <div class="flex items-center gap-4 mb-4">
-                    <div class="p-3 bg-sky-500/10 rounded-xl text-sky-400">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                    </div>
-                    <span class="text-slate-400 text-sm font-medium uppercase tracking-wider">Volume Transaksi</span>
-                </div>
-                <h3 class="text-2xl font-bold text-white font-mono">{{ number_format($data['total_volume'] ?? 0, 0, ',', '.') }} <span class="text-xs font-normal text-slate-500">Kendaraan</span></h3>
-                <p class="text-[10px] text-sky-500 mt-2 font-bold uppercase">Bulan Berjalan</p>
-            </div>
-
-            <!-- Occupancy Card -->
+            <!-- Info Card -->
             <div class="card p-6 rounded-2xl border-l-4 border-l-amber-500">
                 <div class="flex items-center gap-4 mb-4">
                     <div class="p-3 bg-amber-500/10 rounded-xl text-amber-400">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg>
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                     </div>
-                    @php
-                        $occupancy = ($data['kapasitas_total'] ?? 0) > 0 ? round(($data['kapasitas_terisi'] / $data['kapasitas_total']) * 100) : 0;
-                    @endphp
-                    <span class="text-slate-400 text-sm font-medium uppercase tracking-wider">Okupansi Real-time</span>
+                    <span class="text-slate-400 text-sm font-medium uppercase tracking-wider">Status Sistem</span>
                 </div>
-                <div class="flex items-end justify-between">
-                    <h3 class="text-2xl font-bold text-white font-mono">{{ $occupancy }}%</h3>
-                    <span class="text-xs text-slate-500">{{ $data['kapasitas_terisi'] ?? 0 }} / {{ $data['kapasitas_total'] ?? 0 }} Terisi</span>
-                </div>
-                <div class="w-full bg-slate-800 h-1.5 rounded-full mt-3 overflow-hidden border border-slate-700">
-                    <div class="bg-amber-500 h-full rounded-full transition-all duration-1000" style="width: {{ $occupancy }}%"></div>
-                </div>
+                <h3 class="text-2xl font-bold text-white font-mono">AKTIF</h3>
+                <p class="text-[10px] text-amber-500 mt-2 font-bold uppercase">Semua Layanan Berjalan</p>
             </div>
-        </div>
 
         <!-- RECENT TRANSACTIONS FOR OWNER -->
         <div class="card p-8 rounded-2xl">

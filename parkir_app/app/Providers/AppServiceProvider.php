@@ -37,10 +37,13 @@ class AppServiceProvider extends ServiceProvider
         Gate::define('petugas', fn($user) => $user->role === 'petugas');
         Gate::define('owner', fn($user) => $user->role === 'owner');
         
-        // Rekap Transaksi Sesuai Waktu (Hanya Owner di Tabel PDF)
+        // Rekap Transaksi Sesuai Waktu (Hanya Owner)
         Gate::define('view-reports', fn($user) => $user->role === 'owner');
         
-        // Transaksi & Cetak Struk (Hanya Petugas di Tabel PDF)
+        // Transaksi & Cetak Struk (Hanya Petugas)
         Gate::define('manage-transaksi', fn($user) => $user->role === 'petugas');
+        
+        // Manajemen Kendaraan (Hanya Admin)
+        Gate::define('manage-kendaraan', fn($user) => $user->role === 'admin');
     }
 }

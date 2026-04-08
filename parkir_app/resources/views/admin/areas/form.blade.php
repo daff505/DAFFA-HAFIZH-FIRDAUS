@@ -32,7 +32,7 @@
                 <!-- Nama Area -->
                 <div>
                     <label for="nama_area" class="block text-sm font-medium text-slate-300 mb-2">Nama Area</label>
-                    <input type="text" name="nama_area" id="nama_area" value="{{ old('nama_area', $area->nama_area) }}" required placeholder="Contoh: Area Motor, Area Mobil" maxlength="20"
+                    <input type="text" name="nama_area" id="nama_area" value="{{ old('nama_area', $area->nama_area) }}" required placeholder="Contoh: Area Motor, Area Mobil" maxlength="50"
                         class="w-full bg-slate-800/50 border border-slate-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition">
                     @error('nama_area') <span class="text-red-400 text-xs mt-1 block">{{ $message }}</span> @enderror
                 </div>
@@ -42,7 +42,7 @@
                 <!-- Lokasi -->
                 <div>
                     <label for="lokasi" class="block text-sm font-medium text-slate-300 mb-2">Lokasi / Nama Tempat</label>
-                    <input type="text" name="lokasi" id="lokasi" value="{{ old('lokasi', $area->lokasi) }}" placeholder="Contoh: Basement 1, Gedung A, Lantai 2" maxlength="20"
+                    <input type="text" name="lokasi" id="lokasi" value="{{ old('lokasi', $area->lokasi) }}" placeholder="Contoh: Basement 1, Gedung A, Lantai 2" maxlength="50"
                         class="w-full bg-slate-800/50 border border-slate-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition">
                     @error('lokasi') <span class="text-red-400 text-xs mt-1 block">{{ $message }}</span> @enderror
                 </div>

@@ -28,10 +28,14 @@ Route::middleware('auth')->group(function () {
         Route::resource('users', \App\Http\Controllers\Admin\UserController::class);
         Route::resource('areas', \App\Http\Controllers\Admin\AreaController::class);
         Route::resource('tarifs', \App\Http\Controllers\Admin\TarifController::class);
-        Route::resource('kendaraan', \App\Http\Controllers\Admin\KendaraanController::class);
         Route::get('logs', [\App\Http\Controllers\Admin\LogController::class, 'index'])->name('logs.index');
         Route::get('pengaturan', [\App\Http\Controllers\Admin\PengaturanController::class, 'index'])->name('pengaturan.index');
         Route::put('pengaturan', [\App\Http\Controllers\Admin\PengaturanController::class, 'update'])->name('pengaturan.update');
+    });
+
+    // Kendaraan (Admin & Petugas)
+    Route::middleware('can:manage-kendaraan')->prefix('admin')->name('admin.')->group(function() {
+        Route::resource('kendaraan', \App\Http\Controllers\Admin\KendaraanController::class);
     });
 
     // Admin & Petugas (Reports)

@@ -65,11 +65,20 @@
                         <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg>
                         Area Parkir
                     </a>
+                </div>
+                @endif
+
+                @if(auth()->check() && auth()->user()->role == 'admin')
+                <div class="mb-6 text-slate-200">
+                    <p class="px-4 text-[10px] font-bold tracking-widest text-slate-500 uppercase mb-2">Operasional Kendaraan</p>
                     <a href="{{ route('admin.kendaraan.index') }}" class="sidebar-link flex items-center px-4 py-2.5 rounded-lg {{ request()->routeIs('admin.kendaraan.*') ? 'active font-semibold' : 'hover:text-white transition' }} mt-1">
                         <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17a2 2 0 11-4 0 2 2 0 014 0zM19 17a2 2 0 11-4 0 2 2 0 014 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10l2.69-2.69A2 2 0 017.1 13H17a2 2 0 012 2v1"></path></svg>
                         Data Kendaraan
                     </a>
                 </div>
+                @endif
+
+                @if(auth()->check() && auth()->user()->role == 'admin')
                 <div class="mb-6">
                     <p class="px-4 text-[10px] font-bold tracking-widest text-slate-500 uppercase mb-2">Sistem & Log</p>
                     <a href="{{ route('admin.tarifs.index') }}" class="sidebar-link flex items-center px-4 py-2.5 rounded-lg {{ request()->routeIs('admin.tarifs.*') ? 'active font-semibold' : 'hover:text-white transition' }}">

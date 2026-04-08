@@ -42,7 +42,7 @@
                     <input type="text" name="plat_nomor" id="plat_nomor"
                         value="{{ old('plat_nomor', $kendaraan->plat_nomor) }}"
                         required placeholder="Contoh: B 1234 ABC"
-                        style="text-transform: uppercase;" maxlength="20"
+                        style="text-transform: uppercase;" maxlength="15"
                         class="w-full bg-slate-800/50 border border-slate-700 rounded-xl px-4 py-3 text-white font-mono font-bold tracking-widest focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition">
                     @error('plat_nomor') <span class="text-red-400 text-xs mt-1 block">{{ $message }}</span> @enderror
                 </div>

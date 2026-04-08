@@ -39,8 +39,7 @@ class DashboardController extends Controller
             $data['chart'] = $chartData;
                 
         } elseif ($role === 'petugas') {
-            $data['areas'] = DB::table('tb_area_parkir')->get();
-            
+            // Data untuk Petugas difokuskan pada navigasi cepat (Tidak butuh area data lagi)
         } elseif ($role === 'owner') {
             $data['pendapatan'] = DB::table('tb_transaksi')
                 ->where('status', 'keluar')
@@ -48,11 +47,9 @@ class DashboardController extends Controller
                 ->sum('biaya_total');
                 
             $data['total_volume'] = DB::table('tb_transaksi')
-                ->whereMonth('waktu_masuk', date('m'))
+                ->where('status', 'keluar')
+                ->whereMonth('waktu_keluar', date('m'))
                 ->count();
-                
-            $data['kapasitas_terisi'] = (int) DB::table('tb_area_parkir')->sum('terisi');
-            $data['kapasitas_total'] = (int) DB::table('tb_area_parkir')->sum('kapasitas');
             
             $data['transaksi_terbaru'] = DB::table('tb_transaksi')
                 ->join('tb_kendaraan', 'tb_transaksi.id_kendaraan', '=', 'tb_kendaraan.id_kendaraan')

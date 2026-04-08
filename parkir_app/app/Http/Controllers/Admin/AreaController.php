@@ -24,8 +24,8 @@ class AreaController extends Controller
     {
         $request->validate([
             'kode_area' => 'required|string|max:20|unique:tb_area_parkir,kode_area',
-            'nama_area' => 'required|string|max:20',
-            'lokasi' => 'nullable|string|max:20',
+            'nama_area' => 'required|string|max:50',
+            'lokasi' => 'nullable|string|max:50',
             'kapasitas' => 'required|integer|min:1',
             'status_area' => 'required|in:aktif,nonaktif,perbaikan',
         ]);
@@ -59,8 +59,8 @@ class AreaController extends Controller
 
         $request->validate([
             'kode_area' => 'required|string|max:20|unique:tb_area_parkir,kode_area,'.$id.',id_area',
-            'nama_area' => 'required|string|max:20',
-            'lokasi' => 'nullable|string|max:20',
+            'nama_area' => 'required|string|max:50',
+            'lokasi' => 'nullable|string|max:50',
             'kapasitas' => 'required|integer|min:1',
             'status_area' => 'required|in:aktif,nonaktif,perbaikan',
         ]);

@@ -42,11 +42,15 @@ class KendaraanController extends Controller
 
     public function store(Request $request)
     {
+        // Bersihkan plat nomor dari karakter non-alfanumerik sebelum validasi
+        $platNomor = strtoupper(preg_replace('/[^A-Za-z0-9]/', '', $request->plat_nomor));
+        $request->merge(['plat_nomor' => $platNomor]);
+
         $request->validate([
             'plat_nomor'      => [
                 'required',
                 'string',
-                'max:20',
+                'max:15',
                 \Illuminate\Validation\Rule::unique('tb_kendaraan')->whereNull('deleted_at')
             ],
             'jenis_kendaraan' => 'required|in:motor,mobil,truk,lainnya',
@@ -58,9 +62,11 @@ class KendaraanController extends Controller
             'id_area'         => 'nullable|exists:tb_area_parkir,id_area',
         ], [
             'plat_nomor.unique' => 'Plat nomor ini sudah terdaftar di sistem.',
+            'plat_nomor.max'    => 'Plat nomor tidak boleh lebih dari 15 karakter.',
         ]);
 
-        $platNomor = strtoupper(preg_replace('/[^A-Za-z0-9]/', '', $request->plat_nomor));
+        // (Sudah dibersihkan di merge request di atas)
+        $platNomor = $request->plat_nomor;
 
         DB::beginTransaction();
         try {
@@ -171,11 +177,15 @@ class KendaraanController extends Controller
     {
         $kendaraan = Kendaraan::findOrFail($id);
 
+        // Bersihkan plat nomor sebelum validasi update
+        $platNomor = strtoupper(preg_replace('/[^A-Za-z0-9]/', '', $request->plat_nomor));
+        $request->merge(['plat_nomor' => $platNomor]);
+
         $request->validate([
             'plat_nomor'      => [
                 'required',
                 'string',
-                'max:20',
+                'max:15',
                 \Illuminate\Validation\Rule::unique('tb_kendaraan')->ignore($id, 'id_kendaraan')->whereNull('deleted_at')
             ],
             'jenis_kendaraan' => 'required|in:motor,mobil,truk,lainnya',
@@ -185,6 +195,7 @@ class KendaraanController extends Controller
             'id_user'         => 'nullable|exists:tb_user,id_user',
         ], [
             'plat_nomor.unique' => 'Plat nomor ini sudah digunakan kendaraan lain.',
+            'plat_nomor.max'    => 'Plat nomor tidak boleh lebih dari 15 karakter.',
         ]);
 
         $kendaraan->update([
